@@ -1,17 +1,27 @@
 import React, {Component} from 'react';
-import {Text} from 'react-native';
-import {connect} from 'react-redux';
+import {View, Text, Button, StyleSheet} from 'react-native';
 
-class Home extends Component {
+export default class Home extends Component {
   state = {};
 
   render() {
-    return <Text>About Developer: Vitaly Lazarenko</Text>;
+    return (
+      <View style={styles.aboutContainer}>
+        <Text style={styles.mainText}>About Developer: Vitaly Lazarenko</Text>
+        <Button title="Run Gallery App" onPress={() => this.props.navigation.navigate('Gallery')} />
+      </View>
+    );
   }
 }
 
-const mapStateToProps = state => {
-  return {test: state.test};
-};
-
-export default connect(mapStateToProps)(Home);
+const styles = StyleSheet.create({
+  mainText: {
+    fontSize: 24,
+    fontWeight: '600',
+  },
+  aboutContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
