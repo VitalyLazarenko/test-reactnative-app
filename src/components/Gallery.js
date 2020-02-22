@@ -29,7 +29,7 @@ class Gallery extends Component {
       this.state.photos = this.props.photos.map(photoDescription => (
         <Image
           key={photoDescription.id}
-          style={{width: 150, height: 100}}
+          style={styles.galleryItem}
           source={{uri: photoDescription.urls.small}}
         />
       ));
@@ -50,7 +50,7 @@ class Gallery extends Component {
                     source={{uri: 'https://99px.ru/sstorage/86/2017/01/image_861701171351153465139.gif'}}
                   />
                 )}
-                {this.state.photos ? this.state.photos : null}
+                <View style={styles.galleryContainer}>{this.state.photos ? this.state.photos : null}</View>
               </View>
             </View>
           </ScrollView>
@@ -99,5 +99,14 @@ const styles = StyleSheet.create({
   },
   highlight: {
     fontWeight: '700',
+  },
+  galleryContainer: {
+    // width: 640,
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  galleryItem: {
+    width: 150,
+    height: 150,
   },
 });
