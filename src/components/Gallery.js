@@ -1,4 +1,4 @@
-import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, ScrollView, StyleSheet, Image, Text, View} from 'react-native';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
@@ -24,10 +24,16 @@ class Gallery extends Component {
             <View style={styles.body}>
               <View style={styles.sectionContainer}>
                 <Text style={styles.sectionTitle}>Gallery Page</Text>
-                <Text style={styles.sectionTitle}>{this.props.loading + ''}</Text>
-                <Text style={styles.sectionDescription}>
-                  Welcome to the Test Application for <Text style={styles.highlight}>Devsteam.mobi</Text>.
-                </Text>
+                {this.props.loading && (
+                  <Image
+                    style={{width: 150, height: 100}}
+                    source={{uri: 'https://99px.ru/sstorage/86/2017/01/image_861701171351153465139.gif'}}
+                  />
+                )}
+                <Image
+                  style={{width: 150, height: 100}}
+                  source={{uri: 'https://99px.ru/sstorage/86/2017/01/image_861701171351153465139.gif'}}
+                />
               </View>
             </View>
           </ScrollView>
@@ -54,9 +60,14 @@ const styles = StyleSheet.create({
   body: {
     backgroundColor: Colors.white,
   },
+  preloader: {},
   sectionContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop: 32,
     paddingHorizontal: 24,
+    backgroundColor: '#e7dfdd',
   },
   sectionTitle: {
     fontSize: 24,
