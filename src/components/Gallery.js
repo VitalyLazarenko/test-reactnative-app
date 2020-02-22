@@ -6,7 +6,9 @@ import {getPhotosThunk} from './../store/thunks';
 import store from './../store';
 
 class Gallery extends Component {
-  state = {};
+  state = {
+    photos: [],
+  };
 
   componentDidMount() {
     this.getPhotos();
@@ -14,6 +16,24 @@ class Gallery extends Component {
 
   getPhotos() {
     store.dispatch(getPhotosThunk());
+  }
+
+  shouldComponentUpdate(nextProps: Readonly<P>, nextState: Readonly<S>, nextContext: any): boolean {
+    if (nextProps.photos) {
+      return true;
+    }
+  }
+
+  componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS): void {
+    if (this.props.photos) {
+      this.state.photos = this.props.photos.map(photoDescription => (
+        <Image
+          key={photoDescription.id}
+          style={{width: 150, height: 100}}
+          source={{uri: photoDescription.urls.small}}
+        />
+      ));
+    }
   }
 
   render() {
@@ -30,10 +50,7 @@ class Gallery extends Component {
                     source={{uri: 'https://99px.ru/sstorage/86/2017/01/image_861701171351153465139.gif'}}
                   />
                 )}
-                <Image
-                  style={{width: 150, height: 100}}
-                  source={{uri: 'https://99px.ru/sstorage/86/2017/01/image_861701171351153465139.gif'}}
-                />
+                {this.state.photos ? this.state.photos : null}
               </View>
             </View>
           </ScrollView>
