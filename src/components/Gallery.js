@@ -24,7 +24,7 @@ class Gallery extends Component {
             <View style={styles.body}>
               <View style={styles.sectionContainer}>
                 <Text style={styles.sectionTitle}>Gallery Page</Text>
-                <Text style={styles.sectionTitle}>{this.props.loading}</Text>
+                <Text style={styles.sectionTitle}>{this.props.loading + ''}</Text>
                 <Text style={styles.sectionDescription}>
                   Welcome to the Test Application for <Text style={styles.highlight}>Devsteam.mobi</Text>.
                 </Text>
@@ -38,9 +38,7 @@ class Gallery extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
-  const {photos, loading} = state;
-  return {photoList: photos, loading};
+  return {photos: state.app.photos, loading: state.app.loading};
 };
 
 export default connect(mapStateToProps)(Gallery);
