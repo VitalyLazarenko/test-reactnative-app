@@ -27,11 +27,7 @@ class Gallery extends Component {
   componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS): void {
     if (this.props.photos) {
       this.state.photos = this.props.photos.map(photoDescription => (
-        <Image
-          key={photoDescription.id}
-          style={styles.galleryItem}
-          source={{uri: photoDescription.urls.small}}
-        />
+        <Image key={photoDescription.id} style={styles.galleryItem} source={{uri: photoDescription.urls.small}} />
       ));
     }
   }
@@ -46,7 +42,7 @@ class Gallery extends Component {
                 <Text style={styles.sectionTitle}>Gallery Page</Text>
                 {this.props.loading && (
                   <Image
-                    style={{width: 150, height: 100}}
+                    style={styles.preloader}
                     source={{uri: 'https://99px.ru/sstorage/86/2017/01/image_861701171351153465139.gif'}}
                   />
                 )}
@@ -77,13 +73,15 @@ const styles = StyleSheet.create({
   body: {
     backgroundColor: Colors.white,
   },
-  preloader: {},
+  preloader: {
+    width: 150,
+    height: 100,
+  },
   sectionContainer: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 32,
-    paddingHorizontal: 24,
+    // paddingHorizontal: 24,
     backgroundColor: '#e7dfdd',
   },
   sectionTitle: {
@@ -101,12 +99,13 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   galleryContainer: {
-    // width: 640,
     display: 'flex',
+    flexDirection: 'row',
     flexWrap: 'wrap',
+    justifyContent: 'space-around',
   },
   galleryItem: {
-    width: 150,
-    height: 150,
+    width: 200,
+    height: 200,
   },
 });
