@@ -1,9 +1,11 @@
-import {SafeAreaView, ScrollView, StyleSheet, Image, Text, View} from 'react-native';
+import {SafeAreaView, ScrollView, TouchableOpacity, StyleSheet, Image, Text, View} from 'react-native';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
+
 import {getPhotosThunk} from './../store/thunks';
 import store from './../store';
+import ImageItem from './ImageItem';
 
 class Gallery extends Component {
   state = {
@@ -24,10 +26,16 @@ class Gallery extends Component {
     }
   }
 
+  onPressHandler() {
+    console.log(123);
+  }
+
   componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS): void {
     if (this.props.photos) {
       this.state.photos = this.props.photos.map(photoDescription => (
-        <Image key={photoDescription.id} style={styles.galleryItem} source={{uri: photoDescription.urls.small}} />
+        <TouchableOpacity key={photoDescription.id} onPress={this.onPressHandler}>
+          <ImageItem source={{uri: photoDescription.urls.small}} userName={photoDescription.user.name} />
+        </TouchableOpacity>
       ));
     }
   }
@@ -39,12 +47,13 @@ class Gallery extends Component {
           <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.scrollView}>
             <View style={styles.body}>
               <View style={styles.sectionContainer}>
-                <Text style={styles.sectionTitle}>Gallery Page</Text>
                 {this.props.loading && (
-                  <Image
-                    style={styles.preloader}
-                    source={{uri: 'https://99px.ru/sstorage/86/2017/01/image_861701171351153465139.gif'}}
-                  />
+                  <View style={styles.preloaderContainer}>
+                    <Image
+                      style={styles.preloader}
+                      source={{uri: 'https://99px.ru/sstorage/86/2017/01/image_861701171351153465139.gif'}}
+                    />
+                  </View>
                 )}
                 <View style={styles.galleryContainer}>{this.state.photos ? this.state.photos : null}</View>
               </View>
@@ -72,6 +81,12 @@ const styles = StyleSheet.create({
   },
   body: {
     backgroundColor: Colors.white,
+  },
+  preloaderContainer: {
+    margin: '85%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   preloader: {
     width: 150,
@@ -103,9 +118,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
-  },
-  galleryItem: {
-    width: 200,
-    height: 200,
   },
 });
