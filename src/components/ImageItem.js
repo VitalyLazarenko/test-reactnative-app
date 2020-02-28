@@ -5,9 +5,9 @@ export default class ImageItem extends Component {
   render() {
     return (
       <View style={styles.imageItemsContainer}>
-        <Image style={styles.galleryItem} source={this.props.source}/>
+        <Image style={styles.galleryItem} source={this.props.source} />
         <View style={styles.imageItemTextContainer}>
-          <Text style={styles.imageItemText}>{this.props.userName}</Text>
+          <Text style={styles.imageItemText}>{this.props.userName.toUpperCase()}</Text>
         </View>
       </View>
     );
@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
     height: 50,
   },
   imageItemText: {
+    fontSize: 13,
     color: '#fff',
   },
 });

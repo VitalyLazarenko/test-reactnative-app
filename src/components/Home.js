@@ -10,7 +10,7 @@ export default class Home extends Component {
         <Text style={styles.mainText}>About Developer: Vitaly Lazarenko</Text>
         <Text style={styles.sectionDescription}>Welcome to the Test Application.</Text>
         <View style={styles.btnContainer}>
-          <Button title="Run Gallery App" onPress={() => this.props.navigation.navigate('Gallery')}/>
+          <Button title="Run Gallery App" onPress={() => this.props.navigation.navigate('Gallery')} />
         </View>
       </View>
     );

@@ -6,12 +6,9 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {getPhotosThunk} from './../store/thunks';
 import store from './../store';
 import ImageItem from './ImageItem';
+import Viewer from './Viewer';
 
 class Gallery extends Component {
-  state = {
-    photos: [],
-  };
-
   componentDidMount() {
     this.getPhotos();
   }
@@ -20,24 +17,8 @@ class Gallery extends Component {
     store.dispatch(getPhotosThunk());
   }
 
-  shouldComponentUpdate(nextProps: Readonly<P>, nextState: Readonly<S>, nextContext: any): boolean {
-    if (nextProps.photos) {
-      return true;
-    }
-  }
-
   onPressHandler() {
     console.log(123);
-  }
-
-  componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS): void {
-    if (this.props.photos) {
-      this.state.photos = this.props.photos.map(photoDescription => (
-        <TouchableOpacity key={photoDescription.id} onPress={this.onPressHandler}>
-          <ImageItem source={{uri: photoDescription.urls.small}} userName={photoDescription.user.name} />
-        </TouchableOpacity>
-      ));
-    }
   }
 
   render() {
@@ -55,7 +36,13 @@ class Gallery extends Component {
                     />
                   </View>
                 )}
-                <View style={styles.galleryContainer}>{this.state.photos ? this.state.photos : null}</View>
+                <View style={styles.galleryContainer}>
+                  {(this.props.photos || []).map(x => (
+                    <TouchableOpacity key={x.id} onPress={() => this.props.navigation.navigate('Viewer')}>
+                      <ImageItem source={{uri: x.urls.small}} userName={x.user.name} />
+                    </TouchableOpacity>
+                  ))}
+                </View>
               </View>
             </View>
           </ScrollView>
