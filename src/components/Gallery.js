@@ -16,8 +16,6 @@ class Gallery extends Component {
     store.dispatch(getPhotosThunk());
   }
 
-  // onPressHandler() {}
-
   render() {
     return (
       <View>
@@ -35,7 +33,14 @@ class Gallery extends Component {
                 )}
                 <View style={styles.galleryContainer}>
                   {(this.props.photos || []).map(x => (
-                    <TouchableOpacity key={x.id} onPress={() => this.props.navigation.navigate('Viewer')}>
+                    <TouchableOpacity
+                      key={x.id}
+                      onPress={() =>
+                        this.props.navigation.navigate('Viewer', {
+                          userName: x.user.name,
+                          source: {uri: x.urls.full},
+                        })
+                      }>
                       <ImageItem source={{uri: x.urls.small}} userName={x.user.name} />
                     </TouchableOpacity>
                   ))}

@@ -12,7 +12,7 @@ import store from './../store';
 
 const Stack = createStackNavigator();
 
-const App: () => React$Node = () => {
+const App = () => {
   return (
     <>
       <NavigationContainer>

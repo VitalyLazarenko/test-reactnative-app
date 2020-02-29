@@ -6,11 +6,13 @@ class Viewer extends Component {
   state = {};
 
   render() {
+    const {userName} = this.props.route.params;
+    const {source} = this.props.route.params;
     return (
       <View style={styles.viewerContainer}>
-        <Image style={styles.viewerImage} source={{uri: 'https://a.wattpad.com/cover/84608722-352-k886345.jpg'}} />
+        <Image style={styles.viewerImage} source={source} />
         <View style={styles.viewerTextContainer}>
-          <Text style={styles.viewerText}>{'Kotofeich'.toUpperCase()}</Text>
+          <Text style={styles.viewerText}>{userName}</Text>
         </View>
       </View>
     );
@@ -39,7 +41,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.2)',
+    backgroundColor: 'rgba(0,0,0,0.4)',
     marginTop: -58,
     width: '85%',
     height: '8%',
