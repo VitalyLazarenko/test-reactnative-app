@@ -29,6 +29,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#e7dfdd',
   },
   btnContainer: {
-    marginTop: '5%',
+    marginTop: 15,
   },
 });

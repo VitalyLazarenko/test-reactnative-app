@@ -1,4 +1,4 @@
-import {SafeAreaView, ScrollView, TouchableOpacity, StyleSheet, Image, Text, View} from 'react-native';
+import {SafeAreaView, ScrollView, TouchableOpacity, StyleSheet, Image, View} from 'react-native';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
@@ -6,7 +6,6 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {getPhotosThunk} from './../store/thunks';
 import store from './../store';
 import ImageItem from './ImageItem';
-import Viewer from './Viewer';
 
 class Gallery extends Component {
   componentDidMount() {
@@ -17,9 +16,7 @@ class Gallery extends Component {
     store.dispatch(getPhotosThunk());
   }
 
-  onPressHandler() {
-    console.log(123);
-  }
+  // onPressHandler() {}
 
   render() {
     return (

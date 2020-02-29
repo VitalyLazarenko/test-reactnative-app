@@ -1,4 +1,4 @@
-import {SafeAreaView, ScrollView, TouchableOpacity, StyleSheet, Image, Text, View} from 'react-native';
+import {StyleSheet, Image, Text, View} from 'react-native';
 import React, {Component} from 'react';
 
 export default class ImageItem extends Component {
